@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://lead-management-system-hngu.onrender.com/api";
 
 function App() {
   const [token, setToken] = useState(
@@ -551,14 +551,20 @@ function Dashboard({ stats, leads, onViewLead }) {
         <div className="value-card">
           <span>Potential Business Value</span>
           <strong>
-            ₹{Number(stats.potentialBusinessValue || 0).toLocaleString()}
+            ₹
+            {Number(
+              stats.potentialBusinessValue || 0
+            ).toLocaleString()}
           </strong>
         </div>
 
         <div className="value-card">
           <span>Won Business Value</span>
           <strong>
-            ₹{Number(stats.wonBusinessValue || 0).toLocaleString()}
+            ₹
+            {Number(
+              stats.wonBusinessValue || 0
+            ).toLocaleString()}
           </strong>
         </div>
       </section>
@@ -581,6 +587,7 @@ function Dashboard({ stats, leads, onViewLead }) {
 
               <div className="recent-right">
                 <StatusBadge status={lead.status} />
+
                 <button
                   className="text-btn"
                   onClick={() => onViewLead(lead)}
@@ -635,6 +642,7 @@ function LeadManagement({
       <section className="filter-panel">
         <div className="search-box">
           <span>⌕</span>
+
           <input
             placeholder="Search leads, company, email..."
             value={search}
@@ -660,7 +668,9 @@ function LeadManagement({
           onChange={(e) => setService(e.target.value)}
         >
           <option value="">All Services</option>
-          <option value="Web Development">Web Development</option>
+          <option value="Web Development">
+            Web Development
+          </option>
           <option value="Mobile Application">
             Mobile Application
           </option>
@@ -732,7 +742,9 @@ function LeadManagement({
                     <td>
                       <div className="lead-name">
                         <div className="small-avatar">
-                          {lead.leadName?.charAt(0).toUpperCase()}
+                          {lead.leadName
+                            ?.charAt(0)
+                            .toUpperCase()}
                         </div>
 
                         <div>
@@ -751,7 +763,10 @@ function LeadManagement({
                     </td>
 
                     <td>
-                      ₹{Number(lead.estimatedValue || 0).toLocaleString()}
+                      ₹
+                      {Number(
+                        lead.estimatedValue || 0
+                      ).toLocaleString()}
                     </td>
 
                     <td>{lead.assignedTo || "-"}</td>
@@ -829,6 +844,7 @@ function LeadFormModal({
             <h2>
               {editingLead ? "Edit Lead" : "Add New Lead"}
             </h2>
+
             <p>
               {editingLead
                 ? "Update lead information"
@@ -845,6 +861,7 @@ function LeadFormModal({
           <div className="form-grid">
             <div>
               <label>Lead Name *</label>
+
               <input
                 required
                 value={form.leadName}
@@ -856,6 +873,7 @@ function LeadFormModal({
 
             <div>
               <label>Company Name *</label>
+
               <input
                 required
                 value={form.companyName}
@@ -867,6 +885,7 @@ function LeadFormModal({
 
             <div>
               <label>Mobile *</label>
+
               <input
                 required
                 value={form.mobile}
@@ -878,6 +897,7 @@ function LeadFormModal({
 
             <div>
               <label>Email *</label>
+
               <input
                 required
                 type="email"
@@ -890,6 +910,7 @@ function LeadFormModal({
 
             <div>
               <label>Service *</label>
+
               <select
                 value={form.service}
                 onChange={(e) =>
@@ -906,6 +927,7 @@ function LeadFormModal({
 
             <div>
               <label>Source *</label>
+
               <select
                 value={form.source}
                 onChange={(e) =>
@@ -922,19 +944,24 @@ function LeadFormModal({
 
             <div>
               <label>Estimated Value *</label>
+
               <input
                 required
                 type="number"
                 min="0"
                 value={form.estimatedValue}
                 onChange={(e) =>
-                  update("estimatedValue", e.target.value)
+                  update(
+                    "estimatedValue",
+                    e.target.value
+                  )
                 }
               />
             </div>
 
             <div>
               <label>Assigned To *</label>
+
               <input
                 required
                 value={form.assignedTo}
@@ -946,6 +973,7 @@ function LeadFormModal({
 
             <div>
               <label>Status *</label>
+
               <select
                 value={form.status}
                 onChange={(e) =>
@@ -963,6 +991,7 @@ function LeadFormModal({
 
             <div className="full-field">
               <label>Remarks</label>
+
               <textarea
                 rows="4"
                 value={form.remarks}
@@ -982,7 +1011,10 @@ function LeadFormModal({
               Cancel
             </button>
 
-            <button type="submit" className="primary-btn">
+            <button
+              type="submit"
+              className="primary-btn"
+            >
               {editingLead ? "Update Lead" : "Create Lead"}
             </button>
           </div>
@@ -1019,21 +1051,34 @@ function DetailsModal({
 
         <div className="details-grid">
           <Detail label="Email" value={lead.email} />
+
           <Detail label="Mobile" value={lead.mobile} />
+
           <Detail label="Service" value={lead.service} />
+
           <Detail label="Source" value={lead.source} />
+
           <Detail
             label="Estimated Value"
             value={`₹${Number(
               lead.estimatedValue || 0
             ).toLocaleString()}`}
           />
-          <Detail label="Assigned To" value={lead.assignedTo} />
+
+          <Detail
+            label="Assigned To"
+            value={lead.assignedTo}
+          />
+
           <Detail
             label="Status"
             value={<StatusBadge status={lead.status} />}
           />
-          <Detail label="Remarks" value={lead.remarks || "-"} />
+
+          <Detail
+            label="Remarks"
+            value={lead.remarks || "-"}
+          />
         </div>
 
         <div className="followup-section">
@@ -1087,6 +1132,7 @@ function DetailsModal({
             <div className="form-grid">
               <div>
                 <label>Date *</label>
+
                 <input
                   required
                   type="date"
@@ -1102,6 +1148,7 @@ function DetailsModal({
 
               <div>
                 <label>Follow-up Type *</label>
+
                 <select
                   value={followUpForm.followUpType}
                   onChange={(e) =>
@@ -1121,6 +1168,7 @@ function DetailsModal({
 
               <div className="full-field">
                 <label>Remarks *</label>
+
                 <textarea
                   required
                   rows="3"
@@ -1136,13 +1184,17 @@ function DetailsModal({
 
               <div>
                 <label>Next Follow-up Date</label>
+
                 <input
                   type="date"
-                  value={followUpForm.nextFollowUpDate}
+                  value={
+                    followUpForm.nextFollowUpDate
+                  }
                   onChange={(e) =>
                     setFollowUpForm({
                       ...followUpForm,
-                      nextFollowUpDate: e.target.value,
+                      nextFollowUpDate:
+                        e.target.value,
                     })
                   }
                 />
@@ -1156,11 +1208,17 @@ function DetailsModal({
         </div>
 
         <div className="modal-footer">
-          <button className="secondary-btn" onClick={onClose}>
+          <button
+            className="secondary-btn"
+            onClick={onClose}
+          >
             Close
           </button>
 
-          <button className="primary-btn" onClick={onEdit}>
+          <button
+            className="primary-btn"
+            onClick={onEdit}
+          >
             Edit Lead
           </button>
         </div>
